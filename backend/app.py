@@ -5,22 +5,29 @@ import uuid
 
 from routes.context_routes import context_bp
 from routes.anomly_routes import anomaly_bp
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 
 =======
 >>>>>>> 2749df6 (Fix AI explanation service and anomaly routes)
+=======
+>>>>>>> Stashed changes
 from services.storage_service import init_db, save_report, get_recent_reports, get_reports_by_zip
 
 app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(context_bp, url_prefix="/api/context")
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 app.register_blueprint(anomaly_bp)
 
 =======
 app.register_blueprint(anomaly_bp, url_prefix="/api")  # needed so /anomalies routes work
 >>>>>>> 2749df6 (Fix AI explanation service and anomaly routes)
+=======
+app.register_blueprint(anomaly_bp, url_prefix="/api")  # needed so /anomalies routes work
+>>>>>>> Stashed changes
 init_db()
 
 @app.route('/api/health', methods=['GET'])
