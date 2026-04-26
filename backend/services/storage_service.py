@@ -73,4 +73,46 @@ def save_report(professional_diagnosis: bool, zipcode: str, state: str, severity
         (
             report["id"],
             report["timestamp"],
-            r
+            report["professional_diagnosis_of_influenza"],
+            report["zipcode"],
+            report["state"],
+            report["severity_of_symptoms"]
+        )
+    )
+    conn.commit()
+    conn.close()
+    report["professional_diagnosis_of_influenza"] = professional_diagnosis
+    return report
+
+def get_recent_reports(days: int = 30) -> list:
+    conn = get_connection()
+    rows = conn.execute("""
+        SELECT * FROM reports
+        WHERE timestamp >= datetime('now', ? || ' days')
+        ORDER BY timestamp DESC
+    """, (f"-{days}",)).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+def get_reports_by_zip(zipcode: str) -> list:
+    conn = get_connection()
+    rows = conn.execute(
+        "SELECT * FROM reports WHERE zipcode = ? ORDER BY timestamp DESC",
+        (zipcode,)
+    ).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
+
+def get_summary() -> list:
+    conn = get_connection()
+    rows = conn.execute("""
+        SELECT zipcode, state, severity_of_symptoms,
+               COUNT(*) as count,
+               SUM(professional_diagnosis_of_influenza) as confirmed_count
+        FROM reports
+        WHERE timestamp >= datetime('now', '-30 days')
+        GROUP BY zipcode, severity_of_symptoms
+        ORDER BY count DESC
+    """).fetchall()
+    conn.close()
+    return [dict(row) for row in rows]
