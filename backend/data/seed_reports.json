@@ -38,5 +38,84 @@
   { "ID": "a1b2c3d4-0037-4000-8000-000000000037", "timestamp": "2026-04-25T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85719", "state": "AZ", "severity_of_symptoms": "Severe" },
   { "ID": "a1b2c3d4-0038-4000-8000-000000000038", "timestamp": "2026-04-25T10:30:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85711", "state": "AZ", "severity_of_symptoms": "Asymptomatic" },
   { "ID": "a1b2c3d4-0039-4000-8000-000000000039", "timestamp": "2026-04-25T13:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85719", "state": "AZ", "severity_of_symptoms": "Critical" },
-  { "ID": "a1b2c3d4-0040-4000-8000-000000000040", "timestamp": "2026-04-25T15:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85745", "state": "AZ", "severity_of_symptoms": "Moderate" }
+  { "ID": "a1b2c3d4-0040-4000-8000-000000000040", "timestamp": "2026-04-25T15:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85745", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "b2c3d4e5-0041-4000-8000-000000000041", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85001", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "b2c3d4e5-0042-4000-8000-000000000042", "timestamp": "2026-04-22T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85001", "state": "AZ", "severity_of_symptoms": "Severe" },
+  { "ID": "b2c3d4e5-0043-4000-8000-000000000043", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85001", "state": "AZ", "severity_of_symptoms": "Critical" },
+
+  { "ID": "b2c3d4e5-0044-4000-8000-000000000044", "timestamp": "2026-04-21T11:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85004", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "b2c3d4e5-0045-4000-8000-000000000045", "timestamp": "2026-04-24T12:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85004", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "b2c3d4e5-0046-4000-8000-000000000046", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85281", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "b2c3d4e5-0047-4000-8000-000000000047", "timestamp": "2026-04-21T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85281", "state": "AZ", "severity_of_symptoms": "Severe" },
+  { "ID": "b2c3d4e5-0048-4000-8000-000000000048", "timestamp": "2026-04-23T10:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85281", "state": "AZ", "severity_of_symptoms": "Mild" },
+  { "ID": "b2c3d4e5-0049-4000-8000-000000000049", "timestamp": "2026-04-25T11:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85281", "state": "AZ", "severity_of_symptoms": "Critical" },
+
+  { "ID": "b2c3d4e5-0050-4000-8000-000000000050", "timestamp": "2026-04-22T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85254", "state": "AZ", "severity_of_symptoms": "Severe" },
+  { "ID": "b2c3d4e5-0051-4000-8000-000000000051", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85254", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0052-4000-8000-000000000052", "timestamp": "2026-04-24T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85021", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "c3d4e5f6-0053-4000-8000-000000000053", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85021", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0054-4000-8000-000000000054", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85022", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "c3d4e5f6-0055-4000-8000-000000000055", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85032", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "c3d4e5f6-0056-4000-8000-000000000056", "timestamp": "2026-04-23T09:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85032", "state": "AZ", "severity_of_symptoms": "Mild" },
+  { "ID": "c3d4e5f6-0057-4000-8000-000000000057", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85032", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0058-4000-8000-000000000058", "timestamp": "2026-04-24T11:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85041", "state": "AZ", "severity_of_symptoms": "Critical" },
+  { "ID": "c3d4e5f6-0059-4000-8000-000000000059", "timestamp": "2026-04-25T12:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85041", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0060-4000-8000-000000000060", "timestamp": "2026-04-25T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85042", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0061-4000-8000-000000000061", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85051", "state": "AZ", "severity_of_symptoms": "Mild" },
+  { "ID": "c3d4e5f6-0062-4000-8000-000000000062", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85051", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0063-4000-8000-000000000063", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85053", "state": "AZ", "severity_of_symptoms": "Asymptomatic" },
+
+  { "ID": "c3d4e5f6-0064-4000-8000-000000000064", "timestamp": "2026-04-23T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85083", "state": "AZ", "severity_of_symptoms": "Severe" },
+  { "ID": "c3d4e5f6-0065-4000-8000-000000000065", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85083", "state": "AZ", "severity_of_symptoms": "Critical" },
+
+  { "ID": "c3d4e5f6-0066-4000-8000-000000000066", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85085", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0067-4000-8000-000000000067", "timestamp": "2026-04-24T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85202", "state": "AZ", "severity_of_symptoms": "Mild" },
+  { "ID": "c3d4e5f6-0068-4000-8000-000000000068", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85202", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0069-4000-8000-000000000069", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85203", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0070-4000-8000-000000000070", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85210", "state": "AZ", "severity_of_symptoms": "Critical" },
+  { "ID": "c3d4e5f6-0071-4000-8000-000000000071", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85210", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "c3d4e5f6-0072-4000-8000-000000000072", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85225", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0073-4000-8000-000000000073", "timestamp": "2026-04-24T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85226", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "c3d4e5f6-0074-4000-8000-000000000074", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85226", "state": "AZ", "severity_of_symptoms": "Critical" },
+
+  { "ID": "c3d4e5f6-0075-4000-8000-000000000075", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85233", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "c3d4e5f6-0076-4000-8000-000000000076", "timestamp": "2026-04-23T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85234", "state": "AZ", "severity_of_symptoms": "Severe" },
+  { "ID": "c3d4e5f6-0077-4000-8000-000000000077", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85234", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "c3d4e5f6-0078-4000-8000-000000000078", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85248", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0079-4000-8000-000000000079", "timestamp": "2026-04-24T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85249", "state": "AZ", "severity_of_symptoms": "Critical" },
+  { "ID": "c3d4e5f6-0080-4000-8000-000000000080", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85249", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0081-4000-8000-000000000081", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85251", "state": "AZ", "severity_of_symptoms": "Moderate" },
+
+  { "ID": "c3d4e5f6-0082-4000-8000-000000000082", "timestamp": "2026-04-20T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85257", "state": "AZ", "severity_of_symptoms": "Mild" },
+  { "ID": "c3d4e5f6-0083-4000-8000-000000000083", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85257", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0084-4000-8000-000000000084", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85260", "state": "AZ", "severity_of_symptoms": "Asymptomatic" },
+
+  { "ID": "c3d4e5f6-0085-4000-8000-000000000085", "timestamp": "2026-04-24T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85266", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "c3d4e5f6-0086-4000-8000-000000000086", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85266", "state": "AZ", "severity_of_symptoms": "Critical" },
+
+  { "ID": "c3d4e5f6-0087-4000-8000-000000000087", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85301", "state": "AZ", "severity_of_symptoms": "Severe" },
+
+  { "ID": "c3d4e5f6-0088-4000-8000-000000000088", "timestamp": "2026-04-23T08:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85302", "state": "AZ", "severity_of_symptoms": "Moderate" },
+  { "ID": "c3d4e5f6-0089-4000-8000-000000000089", "timestamp": "2026-04-25T09:00:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "85302", "state": "AZ", "severity_of_symptoms": "Mild" },
+
+  { "ID": "c3d4e5f6-0090-4000-8000-000000000090", "timestamp": "2026-04-25T10:00:00Z", "professional_diagnosis_of_influenza": true,  "zipcode": "85303", "state": "AZ", "severity_of_symptoms": "Critical" }
 ]
