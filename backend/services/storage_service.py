@@ -1,7 +1,8 @@
 import sqlite3
 import json
 import os
-from models.report_model import Report
+import uuid
+from datetime import datetime
 
 DB_PATH = "reports.db"
 SEED_PATH = "data/seed_reports.json"
@@ -15,10 +16,12 @@ def init_db():
     conn = get_connection()
     conn.execute("""
         CREATE TABLE IF NOT EXISTS reports (
-            id           INTEGER PRIMARY KEY AUTOINCREMENT,
-            illness      TEXT NOT NULL,
-            zip_code     TEXT NOT NULL,
-            submitted_at TEXT NOT NULL
+            id                                  TEXT PRIMARY KEY,
+            timestamp                           TEXT NOT NULL,
+            professional_diagnosis_of_influenza INTEGER NOT NULL,
+            zipcode                             TEXT NOT NULL,
+            state                               TEXT NOT NULL,
+            severity_of_symptoms                TEXT NOT NULL
         )
     """)
     conn.commit()
@@ -38,51 +41,36 @@ def load_seed_data():
     conn = get_connection()
     for entry in seeds:
         conn.execute(
-            "INSERT INTO reports (illness, zip_code, submitted_at) VALUES (?, ?, ?)",
-            (entry["illness"], entry["zip_code"], entry["submitted_at"])
+            """INSERT INTO reports
+               (id, timestamp, professional_diagnosis_of_influenza, zipcode, state, severity_of_symptoms)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (
+                entry["ID"],
+                entry["timestamp"],
+                1 if entry["professional_diagnosis_of_influenza"] else 0,
+                entry["zipcode"],
+                entry["state"],
+                entry["severity_of_symptoms"]
+            )
         )
     conn.commit()
     conn.close()
 
-def save_report(illness: str, zip_code: str) -> Report:
-    report = Report(illness=illness, zip_code=zip_code)
+def save_report(professional_diagnosis: bool, zipcode: str, state: str, severity: str) -> dict:
+    report = {
+        "id":                                  str(uuid.uuid4()),
+        "timestamp":                           datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "professional_diagnosis_of_influenza": 1 if professional_diagnosis else 0,
+        "zipcode":                             zipcode,
+        "state":                               state,
+        "severity_of_symptoms":                severity
+    }
     conn = get_connection()
-    cursor = conn.execute(
-        "INSERT INTO reports (illness, zip_code, submitted_at) VALUES (?, ?, ?)",
-        (report.illness, report.zip_code, report.submitted_at)
-    )
-    conn.commit()
-    report.id = cursor.lastrowid
-    conn.close()
-    return report
-
-def get_recent_reports(days: int = 30) -> list:
-    conn = get_connection()
-    rows = conn.execute("""
-        SELECT * FROM reports
-        WHERE submitted_at >= date('now', ? || ' days')
-        ORDER BY submitted_at DESC
-    """, (f"-{days}",)).fetchall()
-    conn.close()
-    return [dict(row) for row in rows]
-
-def get_reports_by_zip(zip_code: str) -> list:
-    conn = get_connection()
-    rows = conn.execute(
-        "SELECT * FROM reports WHERE zip_code = ? ORDER BY submitted_at DESC",
-        (zip_code,)
-    ).fetchall()
-    conn.close()
-    return [dict(row) for row in rows]
-
-def get_summary() -> list:
-    conn = get_connection()
-    rows = conn.execute("""
-        SELECT illness, zip_code, COUNT(*) as count
-        FROM reports
-        WHERE submitted_at >= date('now', '-30 days')
-        GROUP BY illness, zip_code
-        ORDER BY count DESC
-    """).fetchall()
-    conn.close()
-    return [dict(row) for row in rows]
+    conn.execute(
+        """INSERT INTO reports
+           (id, timestamp, professional_diagnosis_of_influenza, zipcode, state, severity_of_symptoms)
+           VALUES (?, ?, ?, ?, ?, ?)""",
+        (
+            report["id"],
+            report["timestamp"],
+            r
