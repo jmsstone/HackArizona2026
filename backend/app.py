@@ -10,21 +10,6 @@ CORS(app)
 
 app.register_blueprint(context_bp, url_prefix="/api/context")
 
-<<<<<<< HEAD
-
-@app.route("/")
-def home():
-    return jsonify({"message": "Backend is running"})
-
-
-@app.route("/api/health")
-def health():
-    return jsonify({"status": "healthy"})
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
-=======
 @app.route('/api/health', methods=['GET'])
 def health_check():
     return jsonify({
@@ -84,4 +69,3 @@ def get_recent_reports():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
->>>>>>> main
