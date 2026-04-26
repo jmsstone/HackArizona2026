@@ -3,23 +3,17 @@ from flask_cors import CORS
 import datetime
 import uuid
 
-# Import Person 4's Blueprint
 from routes.context_routes import context_bp
-# Import Person 3's Blueprint
 from routes.anomly_routes import anomaly_bp
 
-# Import Person 2's Database functions
 from services.storage_service import init_db, save_report, get_recent_reports, get_reports_by_zip
 
 app = Flask(__name__)
 CORS(app)
 
-# 1. Register Person 4's logic
 app.register_blueprint(context_bp, url_prefix="/api/context")
-# 2. Register Person 3's anomaly detection
 app.register_blueprint(anomaly_bp)
 
-# 2. Initialize Person 2's Database
 init_db()
 
 @app.route('/api/health', methods=['GET'])
@@ -33,7 +27,6 @@ def health_check():
 def create_report():
     data = request.get_json()
 
-    # Validation Logic based on JSON Schema
     required_fields = [
         "professional_diagnosis_of_influenza", 
         "zipcode", 
@@ -44,8 +37,6 @@ def create_report():
         return jsonify({"error": "Missing required fields"}), 400
 
     try:
-        # 3. Call Person 2's save_report function 
-        # This writes to reports.db instead of just printing!
         new_report = save_report(
             professional_diagnosis=data["professional_diagnosis_of_influenza"],
             zipcode=data["zipcode"],
