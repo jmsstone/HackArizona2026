@@ -1,15 +1,27 @@
 # backend/services/ai_explanation_service.py
 
 import os
-from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = None
+
+def _get_client():
+    global client
+    if client is None:
+        from openai import OpenAI
+        key = os.getenv("OPENAI_API_KEY")
+        if not key:
+            return None
+        client = OpenAI(api_key=key)
+    return client
 
 
 def generate_ai_explanation(anomaly_data, context_data):
+    c = _get_client()
+    if c is None:
+        return generate_rule_based_explanation(anomaly_data, context_data)
     try:
         prompt = f"""
 Return JSON with keys:
@@ -27,7 +39,7 @@ Rules:
 - Explain WHY it's abnormal
 """
 
-        response = client.responses.create(
+        response = c.responses.create(
             model="gpt-4.1-mini",
             input=prompt
         )

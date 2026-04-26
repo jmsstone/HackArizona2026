@@ -5,6 +5,8 @@ import uuid
 
 # Import Person 4's Blueprint
 from routes.context_routes import context_bp
+# Import Person 3's Blueprint
+from routes.anomly_routes import anomaly_bp
 
 # Import Person 2's Database functions
 from services.storage_service import init_db, save_report, get_recent_reports, get_reports_by_zip
@@ -14,6 +16,8 @@ CORS(app)
 
 # 1. Register Person 4's logic
 app.register_blueprint(context_bp, url_prefix="/api/context")
+# 2. Register Person 3's anomaly detection
+app.register_blueprint(anomaly_bp)
 
 # 2. Initialize Person 2's Database
 init_db()
@@ -70,4 +74,4 @@ def get_by_zip(zipcode):
     return jsonify(reports)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
