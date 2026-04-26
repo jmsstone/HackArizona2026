@@ -63,5 +63,5 @@ def get_by_zip(zipcode):
     return jsonify(reports)
 
 if __name__ == '__main__':
-    # Note: Running on 5000 inside the container to match your docker-compose mapping 5001:5000
+    # Changed port to 5001 to match your frontend's API_BASE
     app.run(host='0.0.0.0', port=5001, debug=True)
