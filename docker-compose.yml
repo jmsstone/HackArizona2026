@@ -2,19 +2,15 @@ services:
   backend:
     build: ./backend
     ports:
-      - "5001:5000"
+      - "5001:5001"  # Host 5001 -> Container 5001
     volumes:
       - ./backend:/app
     environment:
       - FLASK_ENV=development
-      - DATABASE_URL=your_db_url_here
 
   frontend:
     build: ./frontend
     ports:
-      - "5002:80"
-    stdin_open: true # Keeps the terminal interactive
+      - "5002:80"  # Frontend remains on 5002 for your browser
     depends_on:
       - backend
-
-# Optional: Add a database service here later (Postgres/Redis)
