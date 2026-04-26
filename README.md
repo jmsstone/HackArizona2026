@@ -30,37 +30,49 @@ This project provides a bridge between individual user health reporting and macr
 
 ---
 
-## Information Sciences Approach To Determine Anomaly
+## 📊 Information Sciences Approach To Anomaly Detection
 
-Step 1 — Percent Change
-pct_change = ((this_week - last_week) / last_week) * 100
-Compares reports this week vs last week. If last week was 0, it returns 999%.
-Step 2 — Z-Score
-z = (this_week - last_week) / (cdc_std * 3 + 1)
-Measures how statistically unusual the spike is using CDC standard deviation as a reference.
-Step 3 — Trend Signal
-if last_week == 0 and this_week > 0 → 75.0
-if ratio > 1.5 → accelerating → signal = (ratio - 1) * 100
-if ratio > 1.05 → increasing → signal = (ratio - 1) * 100
-if ratio >= 0.95 → stable → 0
-else → declining → 0
-Step 4 — Composite Score (0-100)
-score = (0.25 × pct_signal) 
-      + (0.35 × z_signal) 
-      + (0.20 × trend_signal) 
-      + (0.20 × cluster_signal)
+The anomaly engine uses a four-step composite scoring model that combines local report trends with CDC FluView baseline data to generate a risk score between 0 and 100.
+
+### Step 1 — Percent Change
+```math
+pct_change = ((this_week - last_week) / last_week) × 100
+```
+Compares report volume this week against last week. If last week had zero reports, the system returns a maximum signal of 999%.
+
+### Step 2 — Z-Score
+```math
+z = (this_week - last_week) / (cdc_std × 3 + 1)
+```
+Measures how statistically unusual the current spike is, anchored to the CDC FluView standard deviation for the matching epiweek.
+
+### Step 3 — Trend Signal
+| Condition | Classification | Signal |
+|---|---|---|
+| Last week = 0, this week > 0 | Accelerating | 75.0 |
+| Ratio > 1.5 | Accelerating | (ratio − 1) × 100 |
+| Ratio > 1.05 | Increasing | (ratio − 1) × 100 |
+| Ratio ≥ 0.95 | Stable | 0 |
+| Ratio < 0.95 | Declining | 0 |
+
+### Step 4 — Composite Score (0–100)
+```math
+score = (0.25 × pct_signal) + (0.35 × z_signal) + (0.20 × trend_signal) + (0.20 × cluster_signal)
+```
 Where:
+- `pct_signal = min(100, pct_change / 3)`
+- `z_signal = min(100, |z| × 25)`
+- `cluster_signal = min(100, this_week × 5)`
 
-pct_signal = min(100, pct_change / 3)
-z_signal = min(100, abs(z) * 25)
-cluster_signal = min(100, this_week * 5)
+> Z-score carries the highest weight (35%) as it is the most statistically grounded signal. Percent change follows at 25%, with trend direction and cluster size each contributing 20%.
 
-Step 5 — Label
-0–25  → Normal
-26–50 → Emerging Anomaly
-51–75 → Significant Anomaly
-76–100 → Possible Outbreak
-Z-score carries the most weight at 35%, percent change at 25%, trend and cluster size at 20% each.
+### Step 5 — Risk Classification
+| Score | Label |
+|---|---|
+| 0 – 25 | 🟢 Normal |
+| 26 – 50 | 🟡 Emerging Anomaly |
+| 51 – 75 | 🟠 Significant Anomaly |
+| 76 – 100 | 🔴 Possible Outbreak |
 
 ## 📂 Project Structure
 
