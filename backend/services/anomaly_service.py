@@ -16,9 +16,10 @@ def _current_epiweek():
     return wk
 
 
-def _get_baseline(current_week):
-    cdc = get_fluview_3years()
-    weekly = cdc.get("weekly_data", [])
+def _get_baseline(current_week, cdc_data=None):
+    if cdc_data is None:
+        cdc_data = get_fluview_3years()
+    weekly = cdc_data.get("weekly_data", [])
 
     matching_ili = []
     for row in weekly:
@@ -160,7 +161,7 @@ def _label_color(label):
 
 
 
-def analyze_zip(zipcode):
+def analyze_zip(zipcode, cdc_data=None):
 
     reports = get_reports_by_zip(zipcode)
 
@@ -180,7 +181,7 @@ def analyze_zip(zipcode):
         }
 
     current_week = _current_epiweek()
-    baseline = _get_baseline(current_week)
+    baseline = _get_baseline(current_week, cdc_data)
 
     this_week = _count_reports_in_window(reports, 0, 7)
     last_week = _count_reports_in_window(reports, 7, 14)
@@ -221,8 +222,10 @@ def analyze_all_zips():
     rows = conn.execute("SELECT DISTINCT zipcode FROM reports").fetchall()
     conn.close()
 
+    cdc_data = get_fluview_3years()
+
     zips = [row["zipcode"] for row in rows]
-    results = [analyze_zip(z) for z in zips]
+    results = [analyze_zip(z, cdc_data) for z in zips]
 
     results.sort(key=lambda x: x["score"], reverse=True)
     return results
