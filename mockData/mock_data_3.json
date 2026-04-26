@@ -1,0 +1,12 @@
+[
+  {"ID": "sparse-01", "timestamp": "2026-04-26T07:10:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "10001", "state": "NY", "severity_of_symptoms": "Moderate"},
+  {"ID": "sparse-02", "timestamp": "2026-04-26T07:45:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "11201", "state": "NY", "severity_of_symptoms": "Mild"},
+  {"ID": "sparse-03", "timestamp": "2026-04-26T08:05:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "07030", "state": "NJ", "severity_of_symptoms": "Severe"},
+  {"ID": "sparse-04", "timestamp": "2026-04-26T08:12:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "10025", "state": "NY", "severity_of_symptoms": "Critical"},
+  {"ID": "sparse-05", "timestamp": "2026-04-26T08:20:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "08817", "state": "NJ", "severity_of_symptoms": "Asymptomatic"},
+  {"ID": "sparse-06", "timestamp": "2026-04-26T08:35:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "10019", "state": "NY", "severity_of_symptoms": "Moderate"},
+  {"ID": "sparse-07", "timestamp": "2026-04-26T08:42:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "11215", "state": "NY", "severity_of_symptoms": "Mild"},
+  {"ID": "sparse-08", "timestamp": "2026-04-26T08:50:00Z", "professional_diagnosis_of_influenza": false, "zipcode": "10004", "state": "NY", "severity_of_symptoms": "Moderate"},
+  {"ID": "sparse-09", "timestamp": "2026-04-26T08:55:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "07302", "state": "NJ", "severity_of_symptoms": "Severe"},
+  {"ID": "sparse-10", "timestamp": "2026-04-26T09:02:00Z", "professional_diagnosis_of_influenza": true, "zipcode": "10023", "state": "NY", "severity_of_symptoms": "Mild"}
+]
