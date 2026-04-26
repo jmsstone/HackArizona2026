@@ -2,63 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FluWatch design system — dark medical/data dashboard aesthetic.
-   All colors MUST be HSL. */
+/* Epicenter design system — professional medical/data dashboard.
+   Light mode default, dark mode via .dark class. All colors HSL. */
 
 @layer base {
   :root {
-    /* Dark theme by default */
-    --background: 222 28% 7%;
-    --foreground: 210 40% 96%;
+    /* Light theme — institutional, restrained */
+    --background: 210 20% 99%;
+    --foreground: 215 28% 12%;
 
-    --card: 222 26% 10%;
-    --card-foreground: 210 40% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 12%;
 
-    --popover: 222 26% 10%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 12%;
 
-    --primary: 199 89% 55%;
-    --primary-foreground: 222 47% 8%;
+    --primary: 215 25% 18%;
+    --primary-foreground: 210 20% 99%;
 
-    --secondary: 217 23% 16%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 210 16% 96%;
+    --secondary-foreground: 215 28% 12%;
 
-    --muted: 217 23% 14%;
-    --muted-foreground: 215 16% 62%;
+    --muted: 210 16% 96%;
+    --muted-foreground: 215 14% 42%;
 
-    --accent: 217 23% 18%;
-    --accent-foreground: 210 40% 96%;
+    --accent: 210 16% 94%;
+    --accent-foreground: 215 28% 12%;
 
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 23% 18%;
-    --input: 217 23% 18%;
-    --ring: 199 89% 55%;
+    --border: 215 16% 90%;
+    --input: 215 16% 90%;
+    --ring: 215 25% 30%;
 
-    --radius: 0.6rem;
+    --radius: 0.375rem;
 
-    /* Risk semantic tokens */
-    --risk-normal: 142 71% 45%;
-    --risk-emerging: 48 96% 53%;
-    --risk-significant: 25 95% 55%;
-    --risk-outbreak: 0 84% 60%;
-    --risk-nodata: 240 5% 50%;
+    /* Risk semantic tokens — desaturated for analytics tone */
+    --risk-normal: 155 45% 35%;
+    --risk-emerging: 38 75% 42%;
+    --risk-significant: 22 78% 48%;
+    --risk-outbreak: 0 65% 45%;
+    --risk-nodata: 215 12% 55%;
 
-    --risk-normal-foreground: 222 47% 8%;
-    --risk-emerging-foreground: 222 47% 8%;
-    --risk-significant-foreground: 222 47% 8%;
+    --risk-normal-foreground: 0 0% 100%;
+    --risk-emerging-foreground: 0 0% 100%;
+    --risk-significant-foreground: 0 0% 100%;
     --risk-outbreak-foreground: 0 0% 100%;
     --risk-nodata-foreground: 0 0% 100%;
 
-    --sidebar-background: 222 28% 7%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 199 89% 55%;
-    --sidebar-primary-foreground: 222 47% 8%;
-    --sidebar-accent: 217 23% 16%;
-    --sidebar-accent-foreground: 210 40% 96%;
-    --sidebar-border: 217 23% 18%;
-    --sidebar-ring: 199 89% 55%;
+    --sidebar-background: 210 20% 99%;
+    --sidebar-foreground: 215 28% 12%;
+    --sidebar-primary: 215 25% 18%;
+    --sidebar-primary-foreground: 210 20% 99%;
+    --sidebar-accent: 210 16% 94%;
+    --sidebar-accent-foreground: 215 28% 12%;
+    --sidebar-border: 215 16% 90%;
+    --sidebar-ring: 215 25% 30%;
+  }
+
+  .dark {
+    /* Refined dark — deep neutral with subtle cool undertone, layered surfaces */
+    --background: 222 18% 7%;
+    --foreground: 210 25% 96%;
+
+    --card: 222 16% 10%;
+    --card-foreground: 210 25% 96%;
+
+    --popover: 222 16% 11%;
+    --popover-foreground: 210 25% 96%;
+
+    --primary: 210 25% 96%;
+    --primary-foreground: 222 18% 9%;
+
+    --secondary: 222 14% 14%;
+    --secondary-foreground: 210 25% 96%;
+
+    --muted: 222 14% 13%;
+    --muted-foreground: 215 14% 65%;
+
+    --accent: 222 14% 16%;
+    --accent-foreground: 210 25% 96%;
+
+    --destructive: 0 62% 52%;
+    --destructive-foreground: 210 25% 98%;
+
+    --border: 222 13% 18%;
+    --input: 222 13% 18%;
+    --ring: 210 25% 75%;
+
+    --risk-normal: 152 38% 50%;
+    --risk-emerging: 42 78% 60%;
+    --risk-significant: 22 80% 60%;
+    --risk-outbreak: 0 70% 62%;
+    --risk-nodata: 215 12% 52%;
+
+    --risk-normal-foreground: 222 18% 9%;
+    --risk-emerging-foreground: 222 18% 9%;
+    --risk-significant-foreground: 222 18% 9%;
+    --risk-outbreak-foreground: 0 0% 100%;
+    --risk-nodata-foreground: 0 0% 100%;
+
+    --sidebar-background: 222 18% 7%;
+    --sidebar-foreground: 210 25% 96%;
+    --sidebar-primary: 210 25% 96%;
+    --sidebar-primary-foreground: 222 18% 9%;
+    --sidebar-accent: 222 14% 14%;
+    --sidebar-accent-foreground: 210 25% 96%;
+    --sidebar-border: 222 13% 18%;
+    --sidebar-ring: 210 25% 75%;
   }
 }
 
@@ -67,16 +119,20 @@
     @apply border-border;
   }
 
-  html {
-    color-scheme: dark;
-  }
-
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .numeric {
     font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Subtle, professional focus rings */
+  :focus-visible {
+    outline: none;
   }
 }

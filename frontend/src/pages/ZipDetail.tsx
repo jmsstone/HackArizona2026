@@ -5,8 +5,8 @@ import {
   AlertCircle,
   ArrowLeft,
   Droplets,
+  FileText,
   Flower2,
-  Sparkles,
   Thermometer,
   Wind,
 } from "lucide-react";
@@ -71,9 +71,9 @@ export default function ZipDetail() {
 
   return (
     <div className="container max-w-5xl py-8 md:py-10">
-      <Button asChild variant="ghost" size="sm" className="mb-4 -ml-3">
+      <Button asChild variant="ghost" size="sm" className="mb-4 -ml-3 text-muted-foreground">
         <Link to="/dashboard">
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-3.5 w-3.5" />
           Back to dashboard
         </Link>
       </Button>
@@ -93,55 +93,68 @@ export default function ZipDetail() {
       )}
 
       {/* Risk header */}
-      <div className={cn("rounded-xl border bg-card p-6", r.border)}>
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div className="text-xs uppercase tracking-wide text-muted-foreground">ZIP code</div>
-            <div className="text-3xl font-bold tracking-tight numeric">{zipcode}</div>
+      <div className="rounded-md border border-border bg-card">
+        <div className="relative p-6">
+          <span aria-hidden className={cn("absolute inset-y-6 left-0 w-0.5", r.bg)} />
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                ZIP code
+              </div>
+              <div className="mt-0.5 text-3xl font-semibold tracking-tight numeric">{zipcode}</div>
+            </div>
+            {anomaly && (
+              <div
+                className={cn(
+                  "text-[11px] uppercase tracking-wider font-medium",
+                  r.text,
+                )}
+              >
+                {anomaly.label}
+              </div>
+            )}
           </div>
+
+          {anomalyQ.isLoading && <Skeleton className="mt-6 h-16" />}
+
           {anomaly && (
-            <span className={cn("rounded-full border px-3 py-1 text-sm font-medium", r.soft)}>
-              {anomaly.label}
-            </span>
-          )}
-        </div>
-
-        {anomalyQ.isLoading && <Skeleton className="mt-6 h-16" />}
-
-        {anomaly && (
-          <>
             <div className="mt-6 max-w-md">
               <RiskScoreBar score={anomaly.score} riskKey={key} />
             </div>
+          )}
+        </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {anomaly && (
+          <>
+            <div className="grid grid-cols-2 divide-x divide-border border-t border-border sm:grid-cols-4">
               <Stat label="This week" value={anomaly.observed_this_week} />
               <Stat label="Last week" value={anomaly.observed_last_week} />
               <Stat
-                label="% change"
+                label="Change"
                 value={anomaly.percent_change >= 999 ? "+∞%" : `${anomaly.percent_change}%`}
               />
               <Stat label="Z-score" value={anomaly.z_score} />
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border px-6 py-4 text-sm text-muted-foreground">
               <TrendBadge trend={anomaly.trend} />
               {anomaly.baseline_ili != null && (
                 <span>
-                  CDC baseline ILI:{" "}
+                  CDC baseline ILI{" "}
                   <span className="text-foreground numeric">{anomaly.baseline_ili}%</span>
                 </span>
               )}
               {anomaly.current_epiweek && (
                 <span>
-                  Epiweek:{" "}
-                  <span className="text-foreground numeric">{anomaly.current_epiweek}</span>
+                  Epiweek <span className="text-foreground numeric">{anomaly.current_epiweek}</span>
                 </span>
               )}
             </div>
 
             {anomaly.message && (
-              <p className="mt-4 text-sm text-muted-foreground">{anomaly.message}</p>
+              <p className="border-t border-border px-6 py-4 text-sm text-muted-foreground">
+                {anomaly.message}
+              </p>
             )}
           </>
         )}
@@ -150,31 +163,33 @@ export default function ZipDetail() {
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Environment */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Local environment</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              Local environment
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {contextQ.isLoading && <Skeleton className="h-32" />}
             {ctx && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 divide-x divide-y divide-border border border-border">
                 <EnvTile
-                  icon={<Thermometer className="h-4 w-4" />}
+                  icon={<Thermometer className="h-3.5 w-3.5" />}
                   label="Temperature"
                   value={ctx.weather.temperature_f != null ? `${ctx.weather.temperature_f}°F` : "—"}
                 />
                 <EnvTile
-                  icon={<Droplets className="h-4 w-4" />}
+                  icon={<Droplets className="h-3.5 w-3.5" />}
                   label="Humidity"
                   value={ctx.weather.humidity != null ? `${ctx.weather.humidity}%` : "—"}
                 />
                 <EnvTile
-                  icon={<Wind className="h-4 w-4" />}
+                  icon={<Wind className="h-3.5 w-3.5" />}
                   label="Air quality"
                   value={ctx.weather.air_quality}
                   sub={ctx.weather.us_aqi != null ? `AQI ${ctx.weather.us_aqi}` : undefined}
                 />
                 <EnvTile
-                  icon={<Flower2 className="h-4 w-4" />}
+                  icon={<Flower2 className="h-3.5 w-3.5" />}
                   label="Pollen"
                   value={ctx.weather.pollen_level}
                 />
@@ -185,8 +200,10 @@ export default function ZipDetail() {
 
         {/* CDC FluView */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-base">CDC FluView (3-year ILI %)</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              CDC FluView · 3-year ILI %
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {contextQ.isLoading && <Skeleton className="h-48" />}
@@ -194,26 +211,30 @@ export default function ZipDetail() {
               <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={fluChart} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                    <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="3 3" />
+                    <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="2 4" />
                     <XAxis
                       dataKey="epiweek"
                       tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
                       interval="preserveStartEnd"
+                      stroke="hsl(var(--border))"
                     />
-                    <YAxis tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }} />
+                    <YAxis
+                      tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                      stroke="hsl(var(--border))"
+                    />
                     <ReTooltip
                       contentStyle={{
                         background: "hsl(var(--popover))",
                         border: "1px solid hsl(var(--border))",
-                        borderRadius: 8,
+                        borderRadius: 4,
                         fontSize: 12,
                       }}
                     />
                     <Line
                       type="monotone"
                       dataKey="ili"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth={2}
+                      stroke="hsl(var(--foreground))"
+                      strokeWidth={1.5}
                       dot={false}
                     />
                   </LineChart>
@@ -230,28 +251,27 @@ export default function ZipDetail() {
 
       {/* AI Explanation */}
       <Card className="mt-6">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Sparkles className="h-4 w-4 text-primary" />
-            AI explanation
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+          <CardTitle className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <FileText className="h-3.5 w-3.5" />
+            AI Explanation
           </CardTitle>
           <Button
             size="sm"
+            variant="outline"
             disabled={!anomaly || explainMutation.isPending}
             onClick={() => anomaly && explainMutation.mutate(anomaly)}
           >
-            {explainMutation.isPending ? "Generating…" : "Generate AI Explanation"}
+            {explainMutation.isPending ? "Generating…" : "Generate"}
           </Button>
         </CardHeader>
         <CardContent>
           {explainMutation.isError && (
-            <p className="text-sm text-destructive">
-              {(explainMutation.error as Error)?.message}
-            </p>
+            <p className="text-sm text-destructive">{(explainMutation.error as Error)?.message}</p>
           )}
           {!explanation && !explainMutation.isPending && (
             <p className="text-sm text-muted-foreground">
-              Click the button to ask the backend AI to explain why this ZIP looks anomalous.
+              Generate a written summary of why this ZIP code's signal looks anomalous.
             </p>
           )}
           {explanation && <ExplanationView ai={explanation.ai_explanation} />}
@@ -263,9 +283,9 @@ export default function ZipDetail() {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-md border border-border bg-muted/20 px-3 py-2">
-      <div className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</div>
-      <div className="mt-0.5 text-lg font-semibold numeric">{value}</div>
+    <div className="px-6 py-4">
+      <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{label}</div>
+      <div className="mt-1 text-lg font-semibold numeric">{value}</div>
     </div>
   );
 }
@@ -282,21 +302,18 @@ function EnvTile({
   sub?: string;
 }) {
   return (
-    <div className="rounded-md border border-border bg-muted/20 px-3 py-3">
-      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
+    <div className="px-4 py-3">
+      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-muted-foreground">
         {icon}
         {label}
       </div>
-      <div className="mt-1 text-base font-semibold">{value}</div>
+      <div className="mt-1 text-sm font-semibold">{value}</div>
       {sub && <div className="text-xs text-muted-foreground numeric">{sub}</div>}
     </div>
   );
 }
 
 function ExplanationView({ ai }: { ai: AiExplanation }) {
-  // Backend returns either:
-  //  - openai path: { source: "openai", text: "<string, possibly JSON>" }
-  //  - fallback path: { source: "fallback", summary, evidence[], recommendations[] }
   let summary = ai.summary;
   let evidence = ai.evidence;
   let recommendations = ai.recommendations;
@@ -316,19 +333,20 @@ function ExplanationView({ ai }: { ai: AiExplanation }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <span className="rounded-full border border-border bg-muted/30 px-2 py-0.5 text-[10px] uppercase tracking-wide text-muted-foreground">
-          {ai.source}
-        </span>
-        <span className="text-[10px] text-muted-foreground">Not medical advice.</span>
+      <div className="flex items-center gap-3 text-[10px] uppercase tracking-wider text-muted-foreground">
+        <span>Source: {ai.source}</span>
+        <span aria-hidden>·</span>
+        <span>Not medical advice</span>
       </div>
 
       {summary && <p className="text-sm leading-relaxed">{summary}</p>}
 
       {evidence && evidence.length > 0 && (
         <div>
-          <div className="mb-1 text-xs font-medium text-muted-foreground">Evidence</div>
-          <ul className="list-disc space-y-1 pl-5 text-sm">
+          <div className="mb-2 text-[11px] uppercase tracking-wider text-muted-foreground">
+            Evidence
+          </div>
+          <ul className="list-disc space-y-1 pl-5 text-sm marker:text-muted-foreground">
             {evidence.map((e, i) => (
               <li key={i}>{e}</li>
             ))}
@@ -338,8 +356,10 @@ function ExplanationView({ ai }: { ai: AiExplanation }) {
 
       {recommendations && recommendations.length > 0 && (
         <div>
-          <div className="mb-1 text-xs font-medium text-muted-foreground">Recommendations</div>
-          <ul className="list-disc space-y-1 pl-5 text-sm">
+          <div className="mb-2 text-[11px] uppercase tracking-wider text-muted-foreground">
+            Recommendations
+          </div>
+          <ul className="list-disc space-y-1 pl-5 text-sm marker:text-muted-foreground">
             {recommendations.map((rec, i) => (
               <li key={i}>{rec}</li>
             ))}
@@ -348,7 +368,7 @@ function ExplanationView({ ai }: { ai: AiExplanation }) {
       )}
 
       {rawText && (
-        <pre className="whitespace-pre-wrap rounded-md border border-border bg-muted/30 p-3 text-xs">
+        <pre className="whitespace-pre-wrap rounded-sm border border-border bg-muted/30 p-3 text-xs">
           {rawText}
         </pre>
       )}

@@ -9,31 +9,29 @@ export function HealthDot() {
 
   const dotClass =
     state === "ok"
-      ? "bg-risk-normal shadow-[0_0_10px_hsl(var(--risk-normal)/0.7)]"
+      ? "bg-risk-normal"
       : state === "down"
-      ? "bg-risk-outbreak shadow-[0_0_10px_hsl(var(--risk-outbreak)/0.7)]"
-      : "bg-muted-foreground";
+      ? "bg-risk-outbreak"
+      : "bg-muted-foreground/60";
 
   const label =
-    state === "ok"
-      ? "Backend healthy"
-      : state === "down"
-      ? "Backend unreachable"
-      : "Checking backend…";
+    state === "ok" ? "Connected" : state === "down" ? "Disconnected" : "Connecting";
 
   const lastChecked = dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleTimeString() : "—";
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-2.5 py-1 text-xs">
-          <span className={cn("h-2 w-2 rounded-full animate-pulse-dot", dotClass)} />
+        <div className="flex items-center gap-1.5 text-xs">
+          <span className={cn("h-1.5 w-1.5 rounded-full", dotClass)} />
           <span className="hidden sm:inline text-muted-foreground">{label}</span>
         </div>
       </TooltipTrigger>
       <TooltipContent side="bottom">
         <div className="text-xs">
-          <div className="font-medium">{label}</div>
+          <div className="font-medium">
+            {state === "ok" ? "Backend healthy" : state === "down" ? "Backend unreachable" : "Checking backend"}
+          </div>
           <div className="text-muted-foreground">
             {isError ? "GET /api/health failed" : `Last checked ${lastChecked}`}
           </div>

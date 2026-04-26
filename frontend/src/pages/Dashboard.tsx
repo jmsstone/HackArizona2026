@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { AlertCircle, MapPin, RefreshCw } from "lucide-react";
+import { AlertCircle, RefreshCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,23 +19,23 @@ export default function Dashboard() {
 
   return (
     <div className="container py-8 md:py-10">
-      <div className="mb-6 flex items-end justify-between gap-4">
+      <div className="mb-8 flex items-end justify-between gap-4 border-b border-border pb-5">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Anomaly Dashboard</h1>
+          <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Anomaly Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            ZIP codes with the highest anomaly scores appear first.
+            ZIP codes ranked by anomaly score, highest first.
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isFetching}>
-          <RefreshCw className={cn("h-4 w-4", isFetching && "animate-spin")} />
+          <RefreshCw className={cn("h-3.5 w-3.5", isFetching && "animate-spin")} />
           Refresh
         </Button>
       </div>
 
       {isLoading && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3 border border-border">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-48 rounded-lg" />
+            <Skeleton key={i} className="h-44 rounded-none" />
           ))}
         </div>
       )}
@@ -45,10 +45,10 @@ export default function Dashboard() {
           <CardContent className="flex items-start gap-3 py-6">
             <AlertCircle className="mt-0.5 h-5 w-5 text-destructive" />
             <div className="space-y-1">
-              <p className="font-medium">Couldn't reach the FluWatch backend</p>
+              <p className="font-medium">Couldn't reach the Epicenter backend</p>
               <p className="text-sm text-muted-foreground">
-                Make sure the Flask server is running at <code>http://localhost:5000</code> and that
-                the anomaly blueprint is registered in <code>app.py</code>.
+                Make sure the Flask server is running and that the anomaly blueprint is registered
+                in <code>app.py</code>.
               </p>
               <p className="text-xs text-muted-foreground">{(error as Error)?.message}</p>
             </div>
@@ -57,15 +57,13 @@ export default function Dashboard() {
       )}
 
       {data && data.count === 0 && (
-        <Card>
-          <CardContent className="py-10 text-center">
-            <p className="text-muted-foreground">No reports yet — be the first to report.</p>
-          </CardContent>
-        </Card>
+        <div className="rounded-md border border-border py-12 text-center">
+          <p className="text-sm text-muted-foreground">No reports yet.</p>
+        </div>
       )}
 
       {data && data.count > 0 && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3 border border-border rounded-md overflow-hidden">
           {data.anomalies.map((a) => (
             <AnomalyCard key={a.zip_code} anomaly={a} />
           ))}
@@ -84,49 +82,57 @@ function AnomalyCard({ anomaly }: { anomaly: Anomaly }) {
   return (
     <Link
       to={`/zip/${encodeURIComponent(anomaly.zip_code)}`}
-      className={cn(
-        "group relative block rounded-lg border bg-card p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg",
-        r.border,
-      )}
+      className="group relative block bg-card p-5 transition-colors hover:bg-muted/40"
     >
+      <span
+        aria-hidden
+        className={cn("absolute inset-y-3 left-0 w-0.5", r.bg)}
+      />
+
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <MapPin className="h-3.5 w-3.5" />
-            ZIP
+          <div className="text-[11px] uppercase tracking-wider text-muted-foreground">ZIP</div>
+          <div className="mt-0.5 text-2xl font-semibold tracking-tight numeric">
+            {anomaly.zip_code}
           </div>
-          <div className="mt-0.5 text-2xl font-bold tracking-tight numeric">{anomaly.zip_code}</div>
         </div>
-        <span
-          className={cn(
-            "rounded-full border px-2.5 py-1 text-xs font-medium",
-            r.soft,
-          )}
-        >
+        <div className={cn("text-[11px] uppercase tracking-wider font-medium", r.text)}>
           {anomaly.label}
-        </span>
+        </div>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-5">
         <RiskScoreBar score={anomaly.score} riskKey={key} />
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-        <div className="rounded-md border border-border bg-muted/20 px-3 py-2">
-          <div className="text-[11px] uppercase tracking-wide text-muted-foreground">This week</div>
-          <div className="mt-0.5 text-lg font-semibold numeric">{anomaly.observed_this_week}</div>
+      <div className="mt-5 flex items-baseline gap-6 border-t border-border pt-4">
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            This week
+          </div>
+          <div className="mt-0.5 text-base font-semibold numeric">{anomaly.observed_this_week}</div>
         </div>
-        <div className="rounded-md border border-border bg-muted/20 px-3 py-2">
-          <div className="text-[11px] uppercase tracking-wide text-muted-foreground">Last week</div>
-          <div className="mt-0.5 text-lg font-semibold numeric">{anomaly.observed_last_week}</div>
+        <div>
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            Last week
+          </div>
+          <div className="mt-0.5 text-base font-semibold numeric">{anomaly.observed_last_week}</div>
+        </div>
+        <div className="ml-auto text-right">
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Change</div>
+          <div
+            className={cn(
+              "mt-0.5 text-base font-semibold numeric",
+              pct > 0 ? r.text : "text-muted-foreground",
+            )}
+          >
+            {pctLabel}
+          </div>
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between">
+      <div className="mt-3">
         <TrendBadge trend={anomaly.trend} />
-        <span className={cn("text-sm font-medium numeric", pct > 0 ? r.text : "text-muted-foreground")}>
-          {pctLabel}
-        </span>
       </div>
     </Link>
   );

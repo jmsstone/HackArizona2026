@@ -1,0 +1,19 @@
+<svg width="520" height="120" viewBox="0 0 520 120" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Epicenter</title>
+  <!-- Concentric rings mark -->
+  <g transform="translate(60 60)">
+    <circle r="54" fill="none" stroke="#E05A3A" stroke-width="1.25" opacity="0.16"/>
+    <circle r="42" fill="none" stroke="#E05A3A" stroke-width="1.5"  opacity="0.3"/>
+    <circle r="30" fill="none" stroke="#E05A3A" stroke-width="2"    opacity="0.55"/>
+    <circle r="17" fill="none" stroke="#E05A3A" stroke-width="2.5"  opacity="0.85"/>
+    <circle r="5"  fill="#E05A3A"/>
+    <!-- crosshair ticks -->
+    <line x1="0" y1="-54" x2="0" y2="-46" stroke="#E05A3A" stroke-width="1.5" opacity="0.45"/>
+    <line x1="0" y1="46"  x2="0" y2="54"  stroke="#E05A3A" stroke-width="1.5" opacity="0.45"/>
+    <line x1="-54" y1="0" x2="-46" y2="0" stroke="#E05A3A" stroke-width="1.5" opacity="0.45"/>
+    <line x1="46"  y1="0" x2="54"  y2="0" stroke="#E05A3A" stroke-width="1.5" opacity="0.45"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="135" y="68" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="600" letter-spacing="-1.2" fill="#1a1a1a">EpiCenter</text>
+  <text x="137" y="92" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="500" letter-spacing="4.5" fill="#8a8a8a">EARLY OUTBREAK DETECTION</text>
+</svg>

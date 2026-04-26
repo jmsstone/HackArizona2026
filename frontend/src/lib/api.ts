@@ -1,4 +1,4 @@
-// FluWatch API client — talks to the Flask backend on localhost:5000.
+// Epicenter API client — talks to the Flask backend on localhost:5000.
 // All endpoints are typed against the actual response shapes returned by the Python services.
 
 export const API_BASE = "http://localhost:5001/api";
