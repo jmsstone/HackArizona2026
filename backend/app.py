@@ -11,7 +11,14 @@ app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(context_bp, url_prefix="/api/context")
+
 app.register_blueprint(anomaly_bp, url_prefix="/api")  # needed so /anomalies routes work
+
+app.register_blueprint(anomaly_bp)
+
+
+app.register_blueprint(anomaly_bp, url_prefix="/api")  # needed so /anomalies routes work
+
 init_db()
 
 @app.route('/api/health', methods=['GET'])
