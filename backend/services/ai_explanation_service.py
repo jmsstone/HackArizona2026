@@ -1,5 +1,3 @@
-# backend/services/ai_explanation_service.py
-
 import os
 from dotenv import load_dotenv
 
@@ -38,17 +36,14 @@ Rules:
 - Not medical advice
 - Explain WHY it's abnormal
 """
-
-        response = c.responses.create(
-            model="gpt-4.1-mini",
-            input=prompt
+        response = c.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
         )
-
         return {
             "source": "openai",
-            "text": response.output_text
+            "text": response.choices[0].message.content
         }
-
     except Exception:
         return generate_rule_based_explanation(anomaly_data, context_data)
 
